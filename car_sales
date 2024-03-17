@@ -1,0 +1,101 @@
+--El "Conjunto de Datos de Ventas y Tendencias del Mercado de Vehículos" contiene información detallada sobre las transacciones de venta 
+--de vehículos, incluyendo datos como año, marca, modelo, precio de venta y más. Este conjunto de datos es invaluable para comprender el 
+--mercado automotriz y tomar decisiones informadas sobre estrategias de ventas y marketing.
+
+--Modelos de vehículos más populares: Identificando los  5 modelos de vehículos más populares vendidos en nuestro dataset.
+SELECT TOP(5) make, model, COUNT(*) AS total_sales
+FROM car_prices
+GROUP BY make, model
+ORDER BY total_sales DESC;
+
+Results:
+make	  model	   total_sales
+Nissan	Altima	 19349
+Ford	  F-150	   14479
+Ford	  Fusion	 12946
+Toyota	Camry	   12549
+Ford	  Escape	 11893
+
+--Distribución de las ventas por año: Observemos como están distribuidas las ventas desde el año 2000.
+SELECT year, COUNT(*) AS total_sales
+FROM car_prices
+WHERE year > 1999
+GROUP BY year
+ORDER BY year;
+
+Results:
+year	total_sales
+2000	5227
+2001	6468
+2002	9715
+2003	13281
+2004	17342
+2005	21394
+2006	26913
+2007	30845
+2008	31502
+2009	20594
+2010	26485
+2011	48548
+2012	102315
+2013	98168
+2014	81070
+2015	9437
+
+--Precio promedio por modelo: Averiguando cuales con los autos con el valor promedio más elevado. 
+SELECT make, model, AVG(sellingprice) AS avg_price
+FROM car_prices
+GROUP BY make, model
+ORDER BY avg_price DESC;
+
+Results:
+make	         model	              avg_price
+Ferrari	      458 Italia	          183000
+Mercedes-Benz	SLS AMG GT	          156500
+BMW	          i8	                  154222.222222222
+Bentley	      Flying Spur	          154000
+Rolls-Royce 	Ghost	                153488.235294118
+Ferrari	      California	          131846.153846154
+Mercedes-Benz	SLS AMG	              116016.666666667
+Lamborghini	  Gallardo	            112625
+Bentley	      Continental GTC Speed	111000
+Ferrari	      F430	                109750
+
+--Identificando el tipo de cuerpo más vendido
+SELECT TOP(10)body, COUNT(*) AS total_sales
+FROM car_prices
+WHERE body IS NOT NULL
+GROUP BY body
+ORDER BY total_sales DESC;
+
+Results:
+body	     total_sales
+Sedan	      241343
+SUV	        143844
+Hatchback	  26237
+Minivan	    25529
+Coupe    	  17752
+Crew Cab	  16394
+Wagon	      16129
+Convertible	10476
+SuperCrew	  9033
+G Sedan	    7417
+
+--Analizamos que concecionaria tuvo las mejores ventas
+SELECT TOP(10)seller, COUNT(*) AS total_sales
+FROM car_prices
+GROUP BY seller
+ORDER BY total_sales DESC;
+
+Results:
+seller	                             total_sales
+nissan-infiniti lt	                  19693
+ford motor credit company llc	        19162
+the hertz corporation	                18299
+santander consumer	                  15285
+avis corporation	                    12540
+nissan infiniti lt	                  9962
+wells fargo dealer services	          8796
+tdaf remarketing	                    7209
+enterprise veh exchange/rental	      6853
+ge fleet services for itself/servicer	6692
