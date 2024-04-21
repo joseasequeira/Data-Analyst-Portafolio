@@ -1,5 +1,5 @@
---El "Conjunto de Datos de Ventas y Tendencias del Mercado de Vehículos" contiene información detallada sobre las transacciones de venta 
---de vehículos, incluyendo datos como año, marca, modelo, precio de venta y más. Este conjunto de datos es invaluable para comprender el 
+--Este conjunto dedatos contiene información detallada sobre las transacciones de venta de vehículos en distintos estados de
+--Estados Unidos, incluyendo datos como año, marca, modelo, precio de venta y más. Este conjunto de datos es esencial para comprender el 
 --mercado automotriz y tomar decisiones informadas sobre estrategias de ventas y marketing.
 
 --Modelos de vehículos más populares: Identificando los  5 modelos de vehículos más populares vendidos en nuestro dataset.
@@ -42,7 +42,8 @@ year	total_sales
 2014	81070
 2015	9437
 
---Precio promedio por modelo: Averiguando cuales con los autos con el valor promedio más elevado. 
+--Precio promedio por modelo: Averiguando cuales con los autos con el valor promedio más elevado en el caso de los datos de la
+--concecionaria en la que estamos trabajando
 SELECT make, model, AVG(sellingprice) AS avg_price
 FROM car_prices
 GROUP BY make, model
@@ -61,7 +62,7 @@ Lamborghini	  Gallardo	            112625
 Bentley	      Continental GTC Speed	111000
 Ferrari	      F430	                109750
 
---Identificando el tipo de cuerpo más vendido
+--Identificando el tipo de modelo de automovil más vendido
 SELECT TOP(10)body, COUNT(*) AS total_sales
 FROM car_prices
 WHERE body IS NOT NULL
@@ -99,3 +100,23 @@ wells fargo dealer services	          8796
 tdaf remarketing	                    7209
 enterprise veh exchange/rental	      6853
 ge fleet services for itself/servicer	6692
+
+-- Selecciona el estado y cuenta el número total de ventas por estado desde la tabla "car_prices", ordenando los resultados 
+--por el total de ventas en orden descendente.
+SELECT TOP (10) state, COUNT(*) AS total_sales
+FROM car_prices
+GROUP BY state
+ORDER BY total_sales DESC;
+
+Results: 
+state	total_sales
+fl	  82945
+ca	  73148
+pa	  53907
+tx	  45913
+ga	  34750
+nj	  27784
+il	  23486
+nc	  21845
+oh	  21575
+tn	  20895
